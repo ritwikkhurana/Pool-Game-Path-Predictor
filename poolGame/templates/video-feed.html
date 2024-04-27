@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Video</title>
+	<script src="/static/opencv.js"></script>
+</head>
+<style>
+	#container {
+		margin: 0px;
+		width: 500px;
+		height: 375px;
+		border: 10px #333 solid;
+	}
+	#videoElement {
+		width: 500px;
+		height: 375px;
+		background-color: #666;
+	}
+	</style>
+<body>
+	<input type="file" id="files" accept="video/*" />
+	<label for="videoElement">Input Video:</label>
+    <div id="container">
+        <video autoplay="true" id="videoElement">
+	</div>
+	<label for="image_output">Output Video:</label>
+    <div id="container">
+        <img src="https://miro.medium.com/max/880/0*H3jZONKqRuAAeHnG.jpg" width="500" height="375" id="image_output">
+    </div>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+			var video = document.getElementById("videoElement");
+            var socket = io();
+			const image_id = document.getElementById('image_output');
+
+			if (navigator.mediaDevices.getUserMedia) {
+				navigator.mediaDevices.getUserMedia({ video: true })
+				.then(function (stream) {
+				video.srcObject = stream;
+                video.play();
+				})
+				.catch(function (err0r) {
+				console.log("Something went wrong!");
+				});
+			}
+		</script> 
+
+		<script type="text/javascript" src="/static/frameToServer.js"></script>
+		
+	
+</body>
+</html>
